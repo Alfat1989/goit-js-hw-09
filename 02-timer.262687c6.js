@@ -17,6 +17,6 @@ parcelRequire=function(e,r,t,n){var i,o="function"==typeof parcelRequire&&parcel
 },{"./types/options":"lJVm","./l10n/default":"SFEe","./utils":"U4Vg","./utils/dom":"UwHZ","./utils/dates":"viQd","./utils/formatting":"KtbI","./utils/polyfills":"pFfd"}],"c0Wa":[function(require,module,exports) {
 
 },{}],"d2uN":[function(require,module,exports) {
-"use strict";var e=t(require("flatpickr"));function t(e){return e&&e.__esModule?e:{default:e}}require("flatpickr/dist/flatpickr.min.css");const n=document.querySelector("#datetime-picker"),c=document.querySelector("button[data-start]"),o=document.querySelector(".timer");function r(){const e=n.value;console.log(e)}c.addEventListener("click",r);const l=new Date,u={enableTime:!0,time_24hr:!0,defaultDate:new Date,minuteIncrement:1,onClose(e){console.log(e[0])}};(0,e.default)(n,u),console.log(u.selectedDates);
+"use strict";var e=t(require("flatpickr"));function t(e){return e&&e.__esModule?e:{default:e}}require("flatpickr/dist/flatpickr.min.css");const o=document.querySelector("#datetime-picker"),r=document.querySelector("button[data-start]"),n=document.querySelector(".timer");function i(){}r.setAttribute("disabled",!0);const c=new Date,a={enableTime:!0,time_24hr:!0,defaultDate:new Date,minuteIncrement:1,onClose(e){console.log(e[0]);const t=e[0].getTime();console.log(t);const o=a.defaultDate.getTime();if(t<o)return void alert("Please choose a date in the future");const n=t-o;r.removeAttribute("disabled"),r.addEventListener("click",i),console.log(n)}};(0,e.default)(o,a);
 },{"flatpickr":"BKNP","flatpickr/dist/flatpickr.min.css":"c0Wa"}]},{},["d2uN"], null)
-//# sourceMappingURL=/goit-js-hw-09/02-timer.9c99e75b.js.map
+//# sourceMappingURL=/goit-js-hw-09/02-timer.262687c6.js.map
