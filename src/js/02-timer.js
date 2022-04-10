@@ -3,17 +3,15 @@ import 'flatpickr/dist/flatpickr.min.css'
 
 const inputEl = document.querySelector('#datetime-picker')
 const btnStart = document.querySelector('button[data-start]')
-const timerForm = document.querySelector('.timer')
 
+const fieldFormSeconds = document.querySelector('.value[data-seconds]')
+const fieldFormMinutes = document.querySelector('.value[data-minutes]')
+const fieldFormHours = document.querySelector('.value[data-hours]')
+const fieldFormDays = document.querySelector('.value[data-days]')
+
+let inputChooseDate = null;
 
 btnStart.setAttribute('disabled', true)
-
-function onBtnStart() {
-    
-}
-
-const data = new Date()
-// console.log(data)
 
 const options = {
   enableTime: true,
@@ -22,35 +20,64 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     console.log(selectedDates[0]);
-    const inputChooseDate=selectedDates[0].getTime()
+    inputChooseDate=selectedDates[0].getTime()
     console.log(inputChooseDate)
-    const nowDate=options.defaultDate.getTime()
+    let nowDate=options.defaultDate.getTime()
     if (inputChooseDate<nowDate) {
       alert("Please choose a date in the future")
       return
     }
-    const difference = inputChooseDate - nowDate
+
     btnStart.removeAttribute('disabled')
     btnStart.addEventListener('click', onBtnStart)
-    console.log(difference)
   },
 };
 
 flatpickr(inputEl, options)
 
-// function getDifference(){
-//   const inputCHoseDate = this.selectedDates[0].bind(options).getTime()
-//   console.log(inputCHoseDate)
-//   const nowDate = this.options.defaultDate.getTime()
-//   const difference = inputCHoseDate - nowDate
-//   console.log(difference)
-// }
+function onBtnStart() {
+  const timerId=setInterval(() => {
+    let result = inputChooseDate - Date.now();
+    if (result<=1) {
+      clearInterval(timerId)
+      result = 0
+      alert('Selected date has arrived')
+    }
+
+    btnStart.setAttribute('disabled', true)
+    const timeRest = convertMs(result)
+
+    fieldFormSeconds.textContent = `${pad(timeRest.seconds)}`
+    fieldFormMinutes.textContent = `${pad(timeRest.minutes)}`
+    fieldFormHours.textContent = `${pad(timeRest.hours)}`
+    fieldFormDays.textContent = `${pad(timeRest.days)}`
+  }, 1000)
+}
 
 
+function pad(value) {
+  return String(value).padStart(2, '0')
+}
 
 
+function convertMs(ms) {
+  // Number of milliseconds per unit of time
+  const second = 1000;
+  const minute = second * 60;
+  const hour = minute * 60;
+  const day = hour * 24;
 
+  // Remaining days
+  const days = Math.floor(ms / day);
+  // Remaining hours
+  const hours = Math.floor((ms % day) / hour);
+  // Remaining minutes
+  const minutes = Math.floor(((ms % day) % hour) / minute);
+  // Remaining seconds
+  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
-
-
+  console.log({ days, hours, minutes, seconds })
+  return { days, hours, minutes, seconds };
+  
+}
 
