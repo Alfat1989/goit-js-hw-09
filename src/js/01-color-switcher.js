@@ -5,8 +5,6 @@ btnStart.addEventListener('click', startChangeBgColor);
 btnStop.addEventListener('click', stopChangeBgColor);
 let interval = null;
 
-// btnStart.setAttribute
-
 function startChangeBgColor() {
     btnStart.setAttribute('disabled', true)
     interval = setInterval(changeColor, 1000) 

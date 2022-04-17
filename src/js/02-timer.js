@@ -10,7 +10,6 @@ const fieldFormHours = document.querySelector('.value[data-hours]')
 const fieldFormDays = document.querySelector('.value[data-days]')
 
 let inputChooseDate = null;
-
 btnStart.setAttribute('disabled', true)
 
 const options = {
@@ -78,6 +77,6 @@ function convertMs(ms) {
 
   console.log({ days, hours, minutes, seconds })
   return { days, hours, minutes, seconds };
-  
+
 }
 
