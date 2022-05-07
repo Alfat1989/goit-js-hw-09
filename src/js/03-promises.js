@@ -7,7 +7,7 @@ formEl.addEventListener('input', onInputForm)
 const inputObj = {}
 function onInputForm(e) {
   inputObj[e.target.name] = Number(e.target.value)
-  // console.log(inputObj)
+
 }
 
 let amountValue = 0;
